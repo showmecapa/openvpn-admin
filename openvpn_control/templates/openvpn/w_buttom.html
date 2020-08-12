@@ -1,0 +1,15 @@
+<div>
+    <button type="button" id="vpn-activate-{{ instance.pk }}"
+            class="btn btn-xs btn-vpn btn-{% if instance.activated %}success{% else %}default{% endif %}"
+            data-loading-text="processing...">activate
+    </button>
+</div>
+<script>
+    vpn.objects.push({{ instance.pk }});
+    {% if instance.activated %}
+        vpn.activate_fn = function () {
+            $("#vpn-activate-{{ instance.pk  }}").addClass("disabled");
+            vpn.update_ip_info({{ instance.pk }})
+        };
+    {% endif %}
+</script>
